@@ -1,76 +1,195 @@
 {#
-| Variable         | Type    | Description                     |
-|------------------|---------|---------------------------------|
-| cart             | object  |                                 |
-| cart.items_count | int     |                                 |
-| cart.total       | string  | Formatted total ex: "١٠٠ ر.س"   |
+  Header Component — Saadeddin Style
+  Uses Tailwind CSS utility classes (no custom CSS needed)
+  File: src/views/components/header/header.twig
 #}
-<header class="site-header" id="site-header">
 
-  <!-- NAVBAR -->
-  <nav class="navbar">
+{# ── Get important links from theme settings ── #}
+{% set important_links = theme.settings.get('important_links') %}
 
-    <!-- Logo — uses store's logo if set, otherwise store name -->
-    <div class="navbar__logo">
-      <a href="{{ store.url }}">
+<header id="site-header" class="w-full sticky top-0 z-50 shadow-md">
+
+  {# ════════════════════════════════════
+     MAIN NAVBAR  — dark teal background
+     ════════════════════════════════════ #}
+  <nav class="bg-[#1a4a3f] w-full">
+    <div class="flex items-center gap-3 px-4 md:px-6 h-16">
+
+      {# ── LOGO ── #}
+      <a href="{{ store.url }}"
+         class="flex-shrink-0 flex items-center"
+         aria-label="{{ store.name }}">
         {% if store.logo %}
-          <img src="{{ store.logo }}" alt="{{ store.name }}" class="logo-img" />
+          <img src="{{ store.logo }}"
+               alt="{{ store.name }}"
+               class="h-10 w-auto object-contain brightness-0 invert" />
         {% else %}
-          <span class="logo-text">{{ store.name }}</span>
+          <span class="text-white font-bold text-lg tracking-widest uppercase border border-white/40 px-3 py-1 rounded">
+            {{ store.name }}
+          </span>
         {% endif %}
       </a>
-    </div>
 
-    <!-- Delivery / Pickup Toggle -->
-    <div class="navbar__fulfillment">
-      <button class="fulfillment-btn fulfillment-btn--active"
-              id="btn-delivery"
-              onclick="switchFulfillment('delivery')">Delivery</button>
-      <button class="fulfillment-btn"
-              id="btn-pickup"
-              onclick="switchFulfillment('pickup')">Pickup</button>
-    </div>
-
-    <!-- Address Bar -->
-    <div class="navbar__address">
-      <div class="address-selector" onclick="openAddressModal()">
-        <span>🚚</span>
-        <span id="address-label">Select address</span>
+      {# ── DELIVERY / PICKUP TOGGLE ── #}
+      <div class="flex-shrink-0 flex items-center bg-white/10 rounded-lg p-1 gap-1">
+        <button id="btn-delivery"
+                onclick="switchFulfillment('delivery')"
+                class="fulfillment-btn px-4 py-1.5 rounded-md text-sm font-semibold text-white border border-white/60 bg-[#1a4a3f] transition-all duration-200">
+          {{ 'Delivery' }}
+        </button>
+        <button id="btn-pickup"
+                onclick="switchFulfillment('pickup')"
+                class="fulfillment-btn px-4 py-1.5 rounded-md text-sm font-semibold text-white/70 border border-transparent transition-all duration-200">
+          {{ 'Pickup' }}
+        </button>
       </div>
-    </div>
 
-    <!-- Right Actions -->
-    <div class="navbar__actions">
-      <!-- Built-in Salla language switcher -->
-      <salla-localization-modal type="dropdown"></salla-localization-modal>
+      {# ── ADDRESS SELECTOR (takes remaining space) ── #}
+      <div class="flex-1 min-w-0">
+        <button onclick="openAddressModal()"
+                class="w-full flex items-center gap-2 bg-[#d4e8e2] text-[#1a4a3f] rounded-lg px-4 h-10 text-sm font-medium hover:bg-[#c2ddd5] transition-colors duration-200 overflow-hidden">
+          {# Truck icon #}
+          <svg class="flex-shrink-0 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                  d="M1 3h13v10H1V3zm12 2h5l3 5v4h-8V5zM5.5 17a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm11 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"/>
+          </svg>
+          <span id="address-label" class="truncate">
+            {{ 'Select address' }}
+          </span>
+        </button>
+      </div>
 
-      <!-- Cart with item count (built-in Salla component) -->
-      <a href="{{ store.urls.cart }}" class="action-btn">
-        <salla-cart-summary icon="bag"></salla-cart-summary>
-      </a>
+      {# ── RIGHT ACTIONS ── #}
+      <div class="flex-shrink-0 flex items-center gap-2">
 
-      <!-- Menu button -->
-      <button class="action-btn" onclick="toggleMobileMenu()">☰</button>
+        {# Language / Currency switcher #}
+        {% if store.settings.is_multilingual or store.settings.currencies_enabled %}
+          <button type="button"
+                  onclick="salla.event.dispatch('localization::open')"
+                  class="flex items-center gap-1 px-3 py-2 rounded-lg border border-white/30 bg-white/10 text-white text-sm font-semibold hover:bg-white/20 transition-colors duration-200">
+            <span>{{ user.language.name }}</span>
+            {% if store.settings.currencies_enabled %}
+              <span class="mx-1 text-white/50">|</span>
+              <span>{{ currency.symbol }}</span>
+            {% endif %}
+          </button>
+          <salla-localization-modal></salla-localization-modal>
+        {% endif %}
+
+        {# Cart #}
+        <a href="{{ store.urls.cart }}"
+           class="flex items-center justify-center w-10 h-10 rounded-lg border border-white/30 bg-white/10 text-white hover:bg-white/20 transition-colors duration-200"
+           aria-label="Cart">
+          <salla-cart-summary icon="bag"></salla-cart-summary>
+        </a>
+
+        {# Hamburger Menu #}
+        <button onclick="toggleMobileMenu()"
+                class="flex items-center justify-center w-10 h-10 rounded-lg border border-white/30 bg-white/10 text-white hover:bg-white/20 transition-colors duration-200"
+                aria-label="Menu">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+
+      </div>
     </div>
   </nav>
 
-  <!-- CATEGORY FILTER BAR -->
-  <div class="category-bar">
-    <button class="category-bar__search" onclick="openSearch()">🔍</button>
+  {# ════════════════════════════════════
+     CATEGORY FILTER BAR
+     ════════════════════════════════════ #}
+  <div class="bg-gray-100 border-b border-gray-200 w-full">
+    <div class="flex items-center gap-2 px-4 md:px-6 h-12 overflow-x-auto scrollbar-hide">
 
-    <div class="category-bar__pills">
-      {% for category in store.categories | slice(0, 5) %}
-        <a href="{{ category.url }}"
-           class="category-pill {{ category.id == current_category_id ? 'category-pill--active' : '' }}">
-          {{ category.name }}
-        </a>
-      {% endfor %}
+      {# Search trigger #}
+      <button onclick="salla.event.dispatch('search::open')"
+              class="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-lg hover:bg-gray-200 text-gray-500 transition-colors duration-200"
+              aria-label="Search">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-4.35-4.35M17 11A6 6 0 111 11a6 6 0 0116 0z"/>
+        </svg>
+      </button>
+
+      {# Category Pills #}
+      {% if store.categories is defined and store.categories | length %}
+        {% for category in store.categories | slice(0, 6) %}
+          <a href="{{ category.url }}"
+             class="flex-shrink-0 inline-flex items-center gap-1 px-4 py-1.5 rounded-full border border-gray-300 bg-white text-gray-700 text-sm font-medium whitespace-nowrap hover:border-[#1a4a3f] hover:text-[#1a4a3f] transition-all duration-200
+             {% if category.id == current_category.id %} !bg-[#1a4a3f] !border-[#1a4a3f] !text-white {% endif %}">
+            {{ category.name }}
+          </a>
+        {% endfor %}
+      {% else %}
+        {# Fallback placeholder pills shown when no categories are loaded yet #}
+        <span class="flex-shrink-0 inline-flex items-center px-4 py-1.5 rounded-full border border-gray-300 bg-white text-gray-400 text-sm">
+          {{ 'Browse categories' }}
+        </span>
+      {% endif %}
+
+      {# More button #}
+      <button onclick="toggleMoreCategories()"
+              class="flex-shrink-0 ml-auto flex items-center gap-1 text-sm font-semibold text-gray-600 hover:bg-gray-200 px-3 py-1.5 rounded-lg transition-colors duration-200 whitespace-nowrap">
+        {{ 'More' }}
+        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </button>
+
     </div>
-
-    <button class="category-bar__more" onclick="toggleMoreCategories()">More ∨</button>
   </div>
 
 </header>
 
-<!-- Salla's search modal (opens when you call openSearch()) -->
-<salla-search></salla-search>
+{# ════════════════════════════════════
+   MOBILE SIDE MENU
+   ════════════════════════════════════ #}
+<div id="mobile-menu"
+     class="fixed inset-0 z-[200] hidden"
+     aria-hidden="true">
+
+  {# Overlay #}
+  <div onclick="toggleMobileMenu()"
+       class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+
+  {# Panel — slides in from right (switches to left for RTL automatically) #}
+  <div class="absolute top-0 {{ theme.is_rtl ? 'left-0' : 'right-0' }} w-72 h-full bg-white shadow-2xl flex flex-col">
+
+    {# Panel header #}
+    <div class="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+      <span class="font-bold text-gray-800 text-lg">{{ store.name }}</span>
+      <button onclick="toggleMobileMenu()"
+              class="text-gray-400 hover:text-gray-600 text-2xl leading-none">✕</button>
+    </div>
+
+    {# Navigation links #}
+    <nav class="flex-1 overflow-y-auto px-4 py-4 space-y-1">
+      <a href="{{ store.url }}"
+         class="flex items-center px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-[#1a4a3f] font-medium transition-colors duration-150">
+        🏠 {{ 'Home' }}
+      </a>
+
+      {% if store.categories is defined %}
+        {% for category in store.categories %}
+          <a href="{{ category.url }}"
+             class="flex items-center px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-[#1a4a3f] font-medium transition-colors duration-150 border-b border-gray-50">
+            {{ category.name }}
+          </a>
+        {% endfor %}
+      {% endif %}
+    </nav>
+
+    {# Panel footer — contact links #}
+    <div class="px-6 py-4 border-t border-gray-100 flex gap-3">
+      {% if store.contacts.whatsapp %}
+        <a href="https://wa.me/{{ store.contacts.whatsapp }}"
+           class="flex items-center gap-2 text-sm text-gray-500 hover:text-[#1a4a3f]">
+          📱 WhatsApp
+        </a>
+      {% endif %}
+    </div>
+
+  </div>
+</div>

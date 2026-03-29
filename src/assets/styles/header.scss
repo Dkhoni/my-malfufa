@@ -1,0 +1,24 @@
+/* =============================================
+   Header Additions — src/assets/styles/header.scss
+   Most styles are handled by Tailwind classes in header.twig
+   This file only adds things Tailwind can't do inline
+   ============================================= */
+
+/* Hide scrollbar for the category bar (cross-browser) */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE / Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;             /* Chrome / Safari */
+}
+
+/* Active fulfillment button state */
+.fulfillment-btn.is-active {
+  @apply bg-[#1a4a3f] text-white border-white/60;
+}
+
+/* Smooth slide-in for mobile menu panel */
+#mobile-menu .absolute.top-0 {
+  transition: transform 0.3s ease;
+}
