@@ -53,10 +53,11 @@
  *
 */
 /* =============================================
-   Hero Canvas Section
-   File: src/assets/styles/hero-canvas.scss
+   Header Additions — src/assets/styles/header.scss
+   Most styles are handled by Tailwind classes in header.twig
+   This file only adds things Tailwind can't do inline
    ============================================= */
-/* Smooth reveal animation for text overlay */
+/* Hide scrollbar for the category bar (cross-browser) */
 lite-youtube {
     background-color: #000;
     position: relative;
@@ -190,58 +191,6 @@ body.mm-ocd-opened{overflow-y:hidden;overscroll-behavior:none}
 .mm-spn.mm-spn--vertical ul.mm-spn--open{display:block}
 .mm-spn.mm-spn--vertical li.mm-spn--open:before{transform:rotate(135deg) translate(-50%,0)}
 .mm-spn.mm-spn--vertical ul ul li:last-child:after{content:none;display:none}
-.hero-reveal {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-/* Canvas fills its container perfectly */
-#hero-canvas {
-  display: block;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-/* Scroll indicator bounce animation */
-@keyframes scroll-bounce {
-  0%, 100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  50% {
-    transform: translateY(6px);
-    opacity: 0.5;
-  }
-}
-#scroll-indicator {
-  animation: scroll-bounce 2s ease-in-out infinite;
-  transition: opacity 0.5s ease;
-}
-/* Prevent text selection on the canvas hero */
-#hero-scroll-section {
-  -moz-user-select: none;
-       user-select: none;
-  -webkit-user-select: none;
-}
-/* Loading bar shimmer */
-#hero-progress {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.6) 0%, rgb(255, 255, 255) 50%, rgba(255, 255, 255, 0.6) 100%);
-  background-size: 200% 100%;
-  animation: shimmer 1.2s infinite;
-}
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-/* =============================================
-   Header Additions — src/assets/styles/header.scss
-   Most styles are handled by Tailwind classes in header.twig
-   This file only adds things Tailwind can't do inline
-   ============================================= */
-/* Hide scrollbar for the category bar (cross-browser) */
 .scrollbar-hide {
   -ms-overflow-style: none; /* IE / Edge */
   scrollbar-width: none; /* Firefox */
