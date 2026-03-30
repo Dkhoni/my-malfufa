@@ -2314,14 +2314,14 @@ input:where([type='file']):focus{
 .text-white\/50{
     color: rgba(255, 255, 255, 0.5);
 }
+.text-white\/60{
+    color: rgba(255, 255, 255, 0.6);
+}
 .text-white\/70{
     color: rgba(255, 255, 255, 0.7);
 }
 .text-white\/80{
     color: rgba(255, 255, 255, 0.8);
-}
-.text-white\/60{
-    color: rgba(255, 255, 255, 0.6);
 }
 .underline{
     text-decoration-line: underline;

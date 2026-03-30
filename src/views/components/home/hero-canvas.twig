@@ -21,7 +21,7 @@
 {# ─── Base URL of your image sequence folder ─── #}
 {# Upload frames to Salla media and paste the base URL here #}
 {# Example: https://cdn.salla.sa/your-store/frames/ #}
-{% set frames_base_url = theme.settings.get('hero_frames_url', 'https://res.cloudinary.com/dfw9vgbzx/image/upload/frames/') %}
+{% set frames_base_url = theme.settings.get('hero_frames_url', 'https://res.cloudinary.com/dfw9vgbzx/image/upload/') %}
 
 {# ─── Overlay text (editable from theme settings) ─── #}
 {% set hero_title    = theme.settings.get('hero_title', store.name) %}
