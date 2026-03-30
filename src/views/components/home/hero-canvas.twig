@@ -33,6 +33,20 @@
    SCROLL CANVAS WRAPPER
    Height = frame_count * scroll-per-frame (controlled in JS)
    ════════════════════════════════════════════════════════ #}
+<style>
+.hero-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+#hero-canvas { display: block; }
+#scroll-indicator { transition: opacity 0.5s ease; }
+#hero-scroll-section { user-select: none; }
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+</style>
 <section
   id="hero-scroll-section"
   class="relative w-full"
