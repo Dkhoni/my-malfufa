@@ -93,7 +93,7 @@
 
     if (Math.abs(diff) > 0.5) {
       // Ease: move 20% of the remaining distance each frame
-      currentFrame += diff * 0.2;
+      currentFrame += diff * 0.7;
       drawFrame(Math.round(currentFrame));
     } else {
       currentFrame = targetFrame;
