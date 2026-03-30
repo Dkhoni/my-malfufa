@@ -1,0 +1,51 @@
+/* =============================================
+   Hero Canvas Section
+   File: src/assets/styles/hero-canvas.scss
+   ============================================= */
+
+/* Smooth reveal animation for text overlay */
+.hero-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+/* Canvas fills its container perfectly */
+#hero-canvas {
+  display: block;
+  object-fit: cover;
+}
+
+/* Scroll indicator bounce animation */
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50%       { transform: translateY(6px); opacity: 0.5; }
+}
+
+#scroll-indicator {
+  animation: scroll-bounce 2s ease-in-out infinite;
+  transition: opacity 0.5s ease;
+}
+
+/* Prevent text selection on the canvas hero */
+#hero-scroll-section {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Loading bar shimmer */
+#hero-progress {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.6) 0%,
+    rgba(255,255,255,1)   50%,
+    rgba(255,255,255,0.6) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
