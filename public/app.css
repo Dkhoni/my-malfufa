@@ -1157,9 +1157,6 @@ input:where([type='file']):focus{
 .h-3{
     height: 0.75rem;
 }
-.h-4{
-    height: 1rem;
-}
 .h-40{
     height: 10rem;
 }
@@ -1180,9 +1177,6 @@ input:where([type='file']):focus{
 }
 .h-7{
     height: 1.75rem;
-}
-.h-8{
-    height: 2rem;
 }
 .h-80{
     height: 20rem;
@@ -1264,9 +1258,6 @@ input:where([type='file']):focus{
 }
 .w-32{
     width: 8rem;
-}
-.w-4{
-    width: 1rem;
 }
 .w-4\/6{
     width: 66.666667%;
@@ -1575,9 +1566,6 @@ input:where([type='file']):focus{
 }
 .overflow-hidden{
     overflow: hidden;
-}
-.overflow-x-auto{
-    overflow-x: auto;
 }
 .overflow-y-auto{
     overflow-y: auto;
