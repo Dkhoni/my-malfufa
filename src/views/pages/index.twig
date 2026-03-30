@@ -7,10 +7,12 @@
 #}
 {% extends "layouts.master" %}
 {% block content %}
+    <div style="background:red; height:500px; font-size:40px; color:white; display:flex; align-items:center; justify-content:center;">
+        HELLO WORLD TEST
+    </div>
     {% component 'home.hero-canvas' %}
     {% component home %}
 {% endblock %}
 {% block scripts %}
     <script defer src="{{ 'home.js' | asset }}"></script>
-    
 {% endblock %}
