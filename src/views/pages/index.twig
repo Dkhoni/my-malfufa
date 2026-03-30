@@ -7,10 +7,66 @@
 #}
 {% extends "layouts.master" %}
 {% block content %}
-    <div style="background:#1a4a3f; height:100vh; display:flex; align-items:center; justify-content:center;">
-        <h1 style="color:white; font-size:48px;">HERO TEST</h1>
-    </div>
+
+    {# ═══ HERO CANVAS SECTION ═══ #}
+    <section
+      id="hero-scroll-section"
+      style="height: 720px; position: relative; width: 100%;"
+      data-frame-count="120"
+      data-base-url="https://raw.githubusercontent.com/Dkhoni/theme-frames/main/">
+
+      <div id="hero-sticky"
+           style="position: sticky; top: 0; width: 100%; height: 100vh; overflow: hidden;">
+
+        <canvas id="hero-canvas"
+                style="position: absolute; inset: 0; width: 100%; height: 100%; display: block;">
+        </canvas>
+
+        <div class="absolute inset-0 pointer-events-none"
+             style="background: linear-gradient(to bottom, rgba(0,0,0,0.1), transparent, rgba(0,0,0,0.6));">
+        </div>
+
+        <div id="hero-content"
+             style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 80px; text-align: center; color: white;">
+
+          <h1 class="hero-reveal"
+              style="font-size: 48px; font-weight: 800; margin-bottom: 16px;">
+            {{ store.name }}
+          </h1>
+
+          <a href="{{ store.urls.products }}"
+             class="hero-reveal"
+             style="background: white; color: #1a4a3f; font-weight: 700; padding: 14px 32px; border-radius: 50px; text-decoration: none; font-size: 16px; margin-top: 8px;">
+            Shop Now
+          </a>
+
+        </div>
+
+        <div id="scroll-indicator"
+             style="position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.7); font-size: 12px; text-align: center;">
+          <div>Scroll</div>
+          <div style="width: 20px; height: 32px; border: 2px solid rgba(255,255,255,0.5); border-radius: 10px; margin: 4px auto 0; display: flex; justify-content: center; padding-top: 4px;">
+            <div style="width: 4px; height: 8px; background: rgba(255,255,255,0.7); border-radius: 2px; animation: bounce 2s infinite;"></div>
+          </div>
+        </div>
+
+        <div id="hero-loader"
+             style="position: absolute; inset: 0; background: #1a4a3f; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 20;">
+          {% if store.logo %}
+            <img src="{{ store.logo }}" style="height: 40px; filter: brightness(0) invert(1); margin-bottom: 16px;" />
+          {% endif %}
+          <div style="width: 192px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; overflow: hidden;">
+            <div id="hero-progress" style="height: 100%; width: 0%; background: white; transition: width 0.1s;"></div>
+          </div>
+          <p style="color: rgba(255,255,255,0.5); font-size: 12px; margin-top: 12px; letter-spacing: 2px;">LOADING...</p>
+        </div>
+
+      </div>
+    </section>
+
+    {# ═══ REST OF HOME PAGE ═══ #}
     {% component home %}
+
 {% endblock %}
 {% block scripts %}
     <script defer src="{{ 'home.js' | asset }}"></script>
