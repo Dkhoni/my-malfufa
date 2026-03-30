@@ -1,24 +1,14 @@
-{% set frame_count = 120 %}
-{% set frames_base_url = 'https://raw.githubusercontent.com/Dkhoni/theme-frames/main/' %}
-
 <section
   id="hero-scroll-section"
-  class="relative w-full"
-  style="height: {{ frame_count * 6 }}px;"
-  data-frame-count="{{ frame_count }}"
-  data-base-url="{{ frames_base_url }}">
+  style="height: 720px; position: relative; width: 100%;">
 
   <div id="hero-sticky"
-       class="sticky top-0 w-full overflow-hidden"
-       style="height: 100vh; background: teal;">
+       style="position: sticky; top: 0; width: 100%; height: 100vh; background: #1a4a3f; display: flex; align-items: center; justify-content: center;">
 
-    <canvas id="hero-canvas" class="absolute inset-0 w-full h-full"></canvas>
+    <canvas id="hero-canvas" style="position: absolute; inset: 0; width: 100%; height: 100%;"></canvas>
 
-    <div id="hero-loader"
-         class="absolute inset-0 flex items-center justify-center"
-         style="background:#1a4a3f;">
-      <p style="color:white;font-size:24px;">Loading frames...</p>
-      <div id="hero-progress" style="width:0%"></div>
+    <div id="hero-loader" style="position: absolute; inset: 0; background: #1a4a3f; display: flex; align-items: center; justify-content: center;">
+      <p style="color: white; font-size: 24px;">Loading...</p>
     </div>
 
   </div>
