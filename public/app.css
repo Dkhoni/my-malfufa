@@ -1049,9 +1049,6 @@ input:where([type='file']):focus{
 .ml-4{
     margin-left: 1rem;
 }
-.ml-auto{
-    margin-left: auto;
-}
 .mr-1{
     margin-right: 0.25rem;
 }
@@ -1154,9 +1151,6 @@ input:where([type='file']):focus{
 .h-24{
     height: 6rem;
 }
-.h-3{
-    height: 0.75rem;
-}
 .h-40{
     height: 10rem;
 }
@@ -1252,9 +1246,6 @@ input:where([type='file']):focus{
 }
 .w-24{
     width: 6rem;
-}
-.w-3{
-    width: 0.75rem;
 }
 .w-32{
     width: 8rem;
@@ -26806,6 +26797,11 @@ body.font-dinnextltarabic-regular .btn--add-to-cart {
 #mobile-menu .absolute.top-0 {
   transition: transform 0.3s ease;
 }
+#site-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 999 !important;
+}
 .before\:text-orange-300::before{
     content: var(--tw-content);
     --tw-text-opacity: 1;
@@ -26872,11 +26868,6 @@ body.font-dinnextltarabic-regular .btn--add-to-cart {
     --tw-bg-opacity: 1;
     background-color: rgba(194, 221, 213, 1);
     background-color: rgba(194, 221, 213, var(--tw-bg-opacity, 1));
-}
-.hover\:bg-gray-200:hover{
-    --tw-bg-opacity: 1;
-    background-color: rgba(229, 231, 235, 1);
-    background-color: rgba(229, 231, 235, var(--tw-bg-opacity, 1));
 }
 .hover\:bg-gray-50:hover{
     --tw-bg-opacity: 1;

@@ -22,3 +22,8 @@
 #mobile-menu .absolute.top-0 {
   transition: transform 0.3s ease;
 }
+#site-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 999 !important;
+}
