@@ -30,33 +30,32 @@
         {% endif %}
       </a>
 
-      {# ── DELIVERY / PICKUP TOGGLE ── #}
-      <div class="flex-shrink-0 flex items-center bg-white/10 rounded-lg p-1 gap-1">
-        <button id="btn-delivery"
-                onclick="switchFulfillment('delivery')"
-                class="fulfillment-btn px-4 py-1.5 rounded-md text-sm font-semibold text-white border border-white/60 bg-[#1a4a3f] transition-all duration-200">
-          {{ 'Delivery' }}
-        </button>
-        <button id="btn-pickup"
-                onclick="switchFulfillment('pickup')"
-                class="fulfillment-btn px-4 py-1.5 rounded-md text-sm font-semibold text-white/70 border border-transparent transition-all duration-200">
-          {{ 'Pickup' }}
-        </button>
-      </div>
+{# ── DELIVERY / PICKUP TOGGLE ── #}
+<div class="flex-shrink-0 flex items-center bg-white/10 rounded-lg p-1 gap-1">
+  <button id="btn-delivery"
+          onclick="salla.event.dispatch('address::selectAddress')"
+          class="fulfillment-btn px-4 py-1.5 rounded-md text-sm font-semibold text-white border border-white/60 bg-[#1a4a3f] transition-all duration-200">
+    {{ 'Delivery' }}
+  </button>
+  <button id="btn-pickup"
+          onclick="salla.event.dispatch('branch::selectBranch')"
+          class="fulfillment-btn px-4 py-1.5 rounded-md text-sm font-semibold text-white/70 border border-transparent transition-all duration-200">
+    {{ 'Pickup' }}
+  </button>
+</div>
 
       {# ── ADDRESS SELECTOR (takes remaining space) ── #}
       <div class="flex-1 min-w-0">
-        <button onclick="openAddressModal()"
-                class="w-full flex items-center gap-2 bg-[#d4e8e2] text-[#1a4a3f] rounded-lg px-4 h-10 text-sm font-medium hover:bg-[#c2ddd5] transition-colors duration-200 overflow-hidden">
-          {# Truck icon #}
-          <svg class="flex-shrink-0 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
-                  d="M1 3h13v10H1V3zm12 2h5l3 5v4h-8V5zM5.5 17a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm11 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"/>
-          </svg>
-          <span id="address-label" class="truncate">
-            {{ 'Select address' }}
-          </span>
-        </button>
+<button onclick="salla.event.dispatch('address::selectAddress')"
+        class="w-full flex items-center gap-2 bg-[#d4e8e2] text-[#1a4a3f] rounded-lg px-4 h-10 text-sm font-medium hover:bg-[#c2ddd5] transition-colors duration-200 overflow-hidden">
+  <svg class="flex-shrink-0 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+          d="M1 3h13v10H1V3zm12 2h5l3 5v4h-8V5zM5.5 17a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm11 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"/>
+  </svg>
+  <span id="address-label" class="truncate">
+    {{ 'Select address' }}
+  </span>
+</button>
       </div>
 
       {# ── RIGHT ACTIONS ── #}
@@ -117,7 +116,7 @@
 
     </div>
   </div>
-
+<salla-branch-selector></salla-branch-selector>
 </header>
 
 {# ════════════════════════════════════
